@@ -145,3 +145,8 @@ class App extends React.Component {
 
 render(<App />, document.getElementById('app'));
 ```
+
+- http://localhost:8080/ をブラウザで開いて確認
+```
+npm start
+```
