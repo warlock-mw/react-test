@@ -165,19 +165,30 @@ export default class HelloWorld extends Component {
 }
 ```
 
-- src/index.jsx を書き換え
+- src/App.jsx を作成
 ```
-import React from 'react';
+import React, { Component } from 'react';
 import { render } from 'react-dom';
 import HelloWorld from '@/components/HelloWorld';
 
-class App extends React.Component {
+export default class App extends Component {
     render() {
         return (
             <HelloWorld />
         );
     }
 }
+```
 
-render(<App />, document.getElementById('app'));
+- src/index.jsx を書き換え
+```
+import React from 'react';
+import { render } from 'react-dom';
+
+import App from '@/App';
+
+render(
+    <App />,
+    document.getElementById('app')
+);
 ```
