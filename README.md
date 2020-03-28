@@ -150,3 +150,34 @@ render(<App />, document.getElementById('app'));
 ```
 npm start
 ```
+
+## Hello World をコンポーネント化する
+- src/components/HelloWorld.jsx を作成
+```
+import React, { Component } from 'react';
+
+export default class HelloWorld extends Component {
+    render() {
+      return (
+        <p>Hello World!</p>
+      );
+    }
+}
+```
+
+- src/index.jsx を書き換え
+```
+import React from 'react';
+import { render } from 'react-dom';
+import HelloWorld from '@/components/HelloWorld';
+
+class App extends React.Component {
+    render() {
+        return (
+            <HelloWorld />
+        );
+    }
+}
+
+render(<App />, document.getElementById('app'));
+```
