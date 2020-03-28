@@ -28,6 +28,7 @@ nodenv install 13.7.0
 ```
 
 ## プロジェクト作成
+### ディレクトリ作成
 ```
 mkdir react-test
 cd react-test
@@ -35,7 +36,7 @@ nodenv local 13.7.0
 npm init -y
 ```
 
-## ライブラリインストール
+### ライブラリインストール
 - webpack インストール
 ```
 npm install --save-dev webpack webpack-cli webpack-dev-server copy-webpack-plugin
@@ -51,7 +52,7 @@ npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-l
 npm install --save-dev react react-dom
 ```
 
-## 初期設定
+### 初期設定
 - package.json に追加
 ```
   "scripts": {
@@ -116,7 +117,8 @@ module.exports = {
 }; 
 ```
 
-## Hello World 作成
+## Hello World 
+### ファイル作成
 - public/index.html を作成
 ```
 <!DOCTYPE html>
@@ -152,6 +154,7 @@ npm start
 ```
 
 ## Hello World をコンポーネント化する
+### コンポーネント作成
 - src/components/HelloWorld.jsx を作成
 ```
 import React, { Component } from 'react';
@@ -191,4 +194,90 @@ render(
     <App />,
     document.getElementById('app')
 );
+```
+
+## カウンターを作成
+### ファイル作成
+- src/components/Counter.jsx を作成
+```
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+
+function changeCount(baseNum, num) {
+    let count = baseNum + num;
+
+    return {
+        count: count,
+        count_list: [...Array(count).keys()]
+    }
+}
+
+export default class Counter extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            count: 0,
+            count_list: [0],
+        };
+
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+    }
+
+    increment(e) {
+        this.setState(
+            changeCount(this.state.count, 1)
+        );
+    }
+
+    decrement(e) {
+        if (this.state.count > 0) {
+            this.setState(
+                changeCount(this.state.count, -1)
+            );
+        }
+    }
+
+    render() {
+        return (
+            <div>
+              <div>
+                <button onClick={this.decrement}>-</button>
+                <span>{this.state.count}</span>
+                <button onClick={this.increment}>+</button>
+              </div>
+            </div>
+        );
+    }
+}
+```
+コンストラクタで行なっている bind(this) は、render 内で (e) => this.メソッド名(e) でも呼び出せるが、
+イベントが動作した際に毎回、バーチャル DOM の再描画が走るため、bint(this) で設定を行う
+
+jsx 内で呼び出さないメソッドは、class の外でメソッドとして定義して、可読性を高める
+
+- src/App.jsx を変更
+```
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import HelloWorld from '@/components/HelloWorld';
+import Counter from '@/components/Counter';
+
+export default class App extends Component {
+    render() {
+        return (
+            <div>
+              <HelloWorld />
+              <hr />
+              <Counter />
+            </div>
+        );
+    }
+}
+```
+
+- http://localhost:8080/ をブラウザで開いて確認
+```
+npm start
 ```
