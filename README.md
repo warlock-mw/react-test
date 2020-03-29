@@ -49,7 +49,7 @@ npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-l
 
 - React インストール
 ```
-npm install --save-dev react react-dom
+npm install --save-dev react react-dom styled-components 
 ```
 
 ### 初期設定
@@ -261,17 +261,114 @@ jsx 内で呼び出さないメソッドは、class の外でメソッドとし�
 ```
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import styled from 'styled-components';
 import HelloWorld from '@/components/HelloWorld';
 import Counter from '@/components/Counter';
+
+const AppCss = styled.div`
+  border: 1px solid red;
+`;
 
 export default class App extends Component {
     render() {
         return (
-            <div>
+            <AppCss>
               <HelloWorld />
               <hr />
               <Counter />
+            </AppCss>
+        );
+    }
+}
+```
+Styled Components で CSS を適用
+
+- http://localhost:8080/ をブラウザで開いて確認
+```
+npm start
+```
+
+## ちょっと応用編
+### リアクティブ感を楽しむ
+### コンポーネントに親子関係を持たせる
+### 親から子へデータを渡してみる
+- src/components/Counter.jsx を変更
+```
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import CounterList from '@/components/CounterList';
+
+function changeCount(baseNum, num) {
+    let count = baseNum + num;
+
+    return {
+        count: count,
+        countList: [...Array(count + 1).keys()]
+    }
+}
+
+export default class Counter extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            count: 0,
+            countList: [0],
+        };
+
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+    }
+
+    increment(e) {
+        this.setState(
+            changeCount(this.state.count, 1)
+        );
+    }
+
+    decrement(e) {
+        if (this.state.count > 0) {
+            this.setState(
+                changeCount(this.state.count, -1)
+            );
+        }
+    }
+
+    render() {
+        return (
+            <div>
+              <div>
+                <button onClick={this.decrement}>-</button>
+                <span>{this.state.count}</span>
+                <button onClick={this.increment}>+</button>
+              </div>
+              <CounterList countList={this.state.countList} />
             </div>
+        );
+    }
+}
+```
+
+- src/components/CounterList.jsx を作成
+```
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+
+export default class CounterList extends Component {
+
+    render() {
+        const tdList = this.props.countList.map((v, i) => {
+            return <td key={i}>{v}</td>;
+        });
+
+        return (
+          <table border="1">
+            <tbody>
+              <tr>
+                {tdList}
+              </tr>
+            </tbody>
+          </table>
         );
     }
 }
@@ -281,3 +378,5 @@ export default class App extends Component {
 ```
 npm start
 ```
+
+## 次回は Redux を予定

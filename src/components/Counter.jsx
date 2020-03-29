@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import CounterList from '@/components/CounterList';
 
 function changeCount(baseNum, num) {
     let count = baseNum + num;
 
     return {
         count: count,
-        count_list: [...Array(count).keys()]
+        countList: [...Array(count + 1).keys()]
     }
 }
 
@@ -16,7 +17,7 @@ export default class Counter extends Component {
 
         this.state = {
             count: 0,
-            count_list: [0],
+            countList: [0],
         };
 
         this.increment = this.increment.bind(this);
@@ -45,6 +46,7 @@ export default class Counter extends Component {
                 <span>{this.state.count}</span>
                 <button onClick={this.increment}>+</button>
               </div>
+              <CounterList countList={this.state.countList} />
             </div>
         );
     }
