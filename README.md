@@ -208,7 +208,7 @@ function changeCount(baseNum, num) {
 
     return {
         count: count,
-        count_list: [...Array(count).keys()]
+        countList: [...Array(count).keys()]
     }
 }
 
@@ -218,7 +218,7 @@ export default class Counter extends Component {
 
         this.state = {
             count: 0,
-            count_list: [0],
+            countList: [0],
         };
 
         this.increment = this.increment.bind(this);
