@@ -379,4 +379,8 @@ export default class CounterList extends Component {
 npm start
 ```
 
-## 次回は Redux を予定
+## Redux で SPA
+### Redux インストール
+```
+npm install --save-dev react-redux react-router react-router-dom redux redux-logger redux-saga
+```

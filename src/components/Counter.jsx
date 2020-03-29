@@ -1,53 +1,23 @@
 import React, { Component } from 'react';
-import { render } from 'react-dom';
+import { useDispatch, useSelector } from "react-redux";
+import CounterActions from "@/actions/counter";
 import CounterList from '@/components/CounterList';
 
-function changeCount(baseNum, num) {
-    let count = baseNum + num;
+const Counter = () => {
+    const dispatch = useDispatch();
+    const data     = useSelector(state => state.counter);
 
-    return {
-        count: count,
-        countList: [...Array(count + 1).keys()]
-    }
+    console.log(data);
+    return (
+        <div>
+          <div>
+            <button onClick={dispatch(CounterActions.increment())}>-</button>
+            <span>{data.count}</span>
+            <button onClick={dispatch(CounterActions.increment())}>+</button>
+          </div>
+          <CounterList countList={this.state.countList} />
+        </div>
+    );
 }
 
-export default class Counter extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            count: 0,
-            countList: [0],
-        };
-
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
-    }
-
-    increment(e) {
-        this.setState(
-            changeCount(this.state.count, 1)
-        );
-    }
-
-    decrement(e) {
-        if (this.state.count > 0) {
-            this.setState(
-                changeCount(this.state.count, -1)
-            );
-        }
-    }
-
-    render() {
-        return (
-            <div>
-              <div>
-                <button onClick={this.decrement}>-</button>
-                <span>{this.state.count}</span>
-                <button onClick={this.increment}>+</button>
-              </div>
-              <CounterList countList={this.state.countList} />
-            </div>
-        );
-    }
-}
+export default Counter;
