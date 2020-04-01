@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 
-export default class CounterList extends Component {
+function CounterList(props) {
+  const tdList = props.countList.map((v, i) => {
+    return <td key={i}>{v}</td>;
+  });
 
-    render() {
-        const tdList = this.props.countList.map((v, i) => {
-            return <td key={i}>{v}</td>;
-        });
-
-        return (
-          <table border="1">
-            <tbody>
-              <tr>
-                {tdList}
-              </tr>
-            </tbody>
-          </table>
-        );
-    }
+  return (
+    <table border="1">
+      <tbody>
+        <tr>
+          {tdList}
+        </tr>
+      </tbody>
+    </table>
+  );
 }
+
+export default CounterList;

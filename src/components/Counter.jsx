@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { useState } from 'react';
 import CounterList from '@/components/CounterList';
 
 function changeCount(baseNum, num) {
@@ -11,43 +10,36 @@ function changeCount(baseNum, num) {
     }
 }
 
-export default class Counter extends Component {
-    constructor(props) {
-        super(props);
+function Counter() {
+    const [count, setCount]         = useState(0);
+    const [countList, setCountList] = useState([0]);
 
-        this.state = {
-            count: 0,
-            countList: [0],
-        };
+    const increment = currentCount => {
+        const res = changeCount(currentCount, 1);
 
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
+        setCount(res.count);
+        setCountList(res.countList);
     }
-
-    increment(e) {
-        this.setState(
-            changeCount(this.state.count, 1)
-        );
-    }
-
-    decrement(e) {
-        if (this.state.count > 0) {
-            this.setState(
-                changeCount(this.state.count, -1)
-            );
+    
+    const decrement = currentCount => {
+        if (currentCount > 0) {
+            const res = changeCount(currentCount, -1);
+            
+            setCount(res.count);
+            setCountList(res.countList);
         }
     }
 
-    render() {
-        return (
-            <div>
-              <div>
-                <button onClick={this.decrement}>-</button>
-                <span>{this.state.count}</span>
-                <button onClick={this.increment}>+</button>
-              </div>
-              <CounterList countList={this.state.countList} />
-            </div>
-        );
-    }
+    return (
+        <div>
+          <div>
+            <button onClick={() => decrement(count)}>-</button>
+            <span>{count}</span>
+            <button onClick={() => increment(count)}>+</button>
+          </div>
+          <CounterList countList={countList} />
+        </div>
+    );
 }
+
+export default Counter;
