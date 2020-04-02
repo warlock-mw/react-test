@@ -14,28 +14,27 @@ function Counter() {
     const [count, setCount]         = useState(0);
     const [countList, setCountList] = useState([0]);
 
-    const increment = currentCount => {
-        const res = changeCount(currentCount, 1);
-
+    const setAll = res => {
         setCount(res.count);
         setCountList(res.countList);
     }
+
+    const increment = () => {
+        setAll(changeCount(count, 1));
+    }
     
-    const decrement = currentCount => {
-        if (currentCount > 0) {
-            const res = changeCount(currentCount, -1);
-            
-            setCount(res.count);
-            setCountList(res.countList);
+    const decrement = () => {
+        if (count > 0) {
+            setAll(changeCount(count, -1));
         }
     }
 
     return (
         <div>
           <div>
-            <button onClick={() => decrement(count)}>-</button>
+            <button onClick={decrement}>-</button>
             <span>{count}</span>
-            <button onClick={() => increment(count)}>+</button>
+            <button onClick={increment}>+</button>
           </div>
           <CounterList countList={countList} />
         </div>
