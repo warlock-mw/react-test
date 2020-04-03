@@ -1,386 +1,68 @@
-# React でカウンターを作ってみる
-- Hello, World
-- カウンター
-***
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## 開発環境構築
-### mac の場合、homebrew をインストール
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-### anyenv インストール
-- node のバージョン管理をディレクトリ毎に行えるようにする
-```
-brew install anyenv
-anyenv init
+## Available Scripts
 
-# bash_profile or .zshrc へ eval "$(anyenv init -)" を追記
+In the project directory, you can run:
 
-anyenv intall --init
-anyenv install nodenv
-exec $SHELL -l
-nodenv
-nodenv install --list
-nodenv install 13.7.0
+### `npm start`
 
-# node を使いたいディレクトリに移動して nodenv local 13.7.0
-# デフォルトで使用する node は nodenv global 13.7.0
-```
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## プロジェクト作成
-### ディレクトリ作成
-```
-mkdir react-test
-cd react-test
-nodenv local 13.7.0
-npm init -y
-```
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-### ライブラリインストール
-- webpack インストール
-```
-npm install --save-dev webpack webpack-cli webpack-dev-server copy-webpack-plugin
-```
+### `npm test`
 
-- babel インストール
-```
-npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-loader
-```
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-- React インストール
-```
-npm install --save-dev react react-dom styled-components 
-```
+### `npm run build`
 
-### 初期設定
-- package.json に追加
-```
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --hot",
-    "build": "webpack -p"
-  },
-```
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- .babelrc を作成
-```
-{
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "node": true
-        }
-      }
-    ],
-    "@babel/react"
-  ]
-}
-```
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-- webpack.config.js を作成
-```
-const path       = require('path');
-const CopyPlugin = require('copy-webpack-plugin')
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-module.exports = {
-  entry: [ 
-    './src/index.jsx' 
-  ], 
-  output: { 
-    path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
-  }, 
-  devServer: {
-    contentBase: path.resolve(__dirname, 'public')
-  },
-  module: { 
-    rules: [{ 
-      exclude: /node_modules/, 
-      use: ['babel-loader']
-    }], 
-  },
-  resolve: { 
-    modules: [
-      path.resolve(__dirname, 'src'),
-      'node_modules',
-    ],
-    extensions: ['.js', '.jsx'],
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
-  plugins: [
-    new CopyPlugin([{from: './public'}])
-  ],
-}; 
-```
+### `npm run eject`
 
-## Hello World 
-### ファイル作成
-- public/index.html を作成
-```
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>React app</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="bundle.js"></script>
-  </body>
-</html>
-```
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-- src/index.jsx を作成
-```
-import React from 'react';
-import { render } from 'react-dom';
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-class App extends React.Component {
-    render () {
-        return <p>Hello World!</p>;
-    }
-}
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-render(<App />, document.getElementById('app'));
-```
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-- http://localhost:8080/ をブラウザで開いて確認
-```
-npm start
-```
+## Learn More
 
-## Hello World をコンポーネント化する
-### コンポーネント作成
-- src/components/HelloWorld.jsx を作成
-```
-import React, { Component } from 'react';
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-export default class HelloWorld extends Component {
-    render() {
-      return (
-        <p>Hello World!</p>
-      );
-    }
-}
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-- src/App.jsx を作成
-```
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import HelloWorld from '@/components/HelloWorld';
+### Code Splitting
 
-export default class App extends Component {
-    render() {
-        return (
-            <HelloWorld />
-        );
-    }
-}
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-- src/index.jsx を書き換え
-```
-import React from 'react';
-import { render } from 'react-dom';
+### Analyzing the Bundle Size
 
-import App from '@/App';
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-render(
-    <App />,
-    document.getElementById('app')
-);
-```
+### Making a Progressive Web App
 
-## カウンターを作成
-### ファイル作成
-- src/components/Counter.jsx を作成
-```
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-function changeCount(baseNum, num) {
-    let count = baseNum + num;
+### Advanced Configuration
 
-    return {
-        count: count,
-        countList: [...Array(count).keys()]
-    }
-}
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-export default class Counter extends Component {
-    constructor(props) {
-        super(props);
+### Deployment
 
-        this.state = {
-            count: 0,
-            countList: [0],
-        };
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
-    }
+### `npm run build` fails to minify
 
-    increment(e) {
-        this.setState(
-            changeCount(this.state.count, 1)
-        );
-    }
-
-    decrement(e) {
-        if (this.state.count > 0) {
-            this.setState(
-                changeCount(this.state.count, -1)
-            );
-        }
-    }
-
-    render() {
-        return (
-            <div>
-              <div>
-                <button onClick={this.decrement}>-</button>
-                <span>{this.state.count}</span>
-                <button onClick={this.increment}>+</button>
-              </div>
-            </div>
-        );
-    }
-}
-```
-コンストラクタで行なっている bind(this) は、render 内で (e) => this.メソッド名(e) でも呼び出せるが、
-イベントが動作した際に毎回、バーチャル DOM の再描画が走るため、bint(this) で設定を行う
-
-jsx 内で呼び出さないメソッドは、class の外でメソッドとして定義して、可読性を高める
-
-- src/App.jsx を変更
-```
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import styled from 'styled-components';
-import HelloWorld from '@/components/HelloWorld';
-import Counter from '@/components/Counter';
-
-const AppCss = styled.div`
-  border: 1px solid red;
-`;
-
-export default class App extends Component {
-    render() {
-        return (
-            <AppCss>
-              <HelloWorld />
-              <hr />
-              <Counter />
-            </AppCss>
-        );
-    }
-}
-```
-Styled Components で CSS を適用
-
-- http://localhost:8080/ をブラウザで開いて確認
-```
-npm start
-```
-
-## ちょっと応用編
-### リアクティブ感を楽しむ
-### コンポーネントに親子関係を持たせる
-### 親から子へデータを渡してみる
-- src/components/Counter.jsx を変更
-```
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import CounterList from '@/components/CounterList';
-
-function changeCount(baseNum, num) {
-    let count = baseNum + num;
-
-    return {
-        count: count,
-        countList: [...Array(count + 1).keys()]
-    }
-}
-
-export default class Counter extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            count: 0,
-            countList: [0],
-        };
-
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
-    }
-
-    increment(e) {
-        this.setState(
-            changeCount(this.state.count, 1)
-        );
-    }
-
-    decrement(e) {
-        if (this.state.count > 0) {
-            this.setState(
-                changeCount(this.state.count, -1)
-            );
-        }
-    }
-
-    render() {
-        return (
-            <div>
-              <div>
-                <button onClick={this.decrement}>-</button>
-                <span>{this.state.count}</span>
-                <button onClick={this.increment}>+</button>
-              </div>
-              <CounterList countList={this.state.countList} />
-            </div>
-        );
-    }
-}
-```
-
-- src/components/CounterList.jsx を作成
-```
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-
-export default class CounterList extends Component {
-
-    render() {
-        const tdList = this.props.countList.map((v, i) => {
-            return <td key={i}>{v}</td>;
-        });
-
-        return (
-          <table border="1">
-            <tbody>
-              <tr>
-                {tdList}
-              </tr>
-            </tbody>
-          </table>
-        );
-    }
-}
-```
-
-- http://localhost:8080/ をブラウザで開いて確認
-```
-npm start
-```
-
-## Redux で SPA
-### Redux インストール
-```
-npm install --save-dev react-redux react-router react-router-dom redux redux-logger redux-saga
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
