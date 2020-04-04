@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import AppNav from '@/components/AppNav';
 import logo from '@/logo.svg';
 import { Counter } from '@/features/counter/Counter';
 import '@/App.css';
@@ -7,10 +7,7 @@ import '@/App.css';
 function App() {
   return (
     <>
-      <Switch>
-        <Route exact path="/a" render={() => (<div>Match</div>)} />
-        <Route render={() => (<div>Miss</div>)} />
-      </Switch>
+      <AppNav />
       
       <div className="App">
         <header className="App-header">
