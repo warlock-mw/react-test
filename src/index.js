@@ -5,19 +5,11 @@ import App from '@/App';
 import store, { history } from '@/app/store';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import { Route, Switch } from 'react-router';
-
 import * as serviceWorker from '@/serviceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}> 
-      <>
-        <Switch>
-          <Route exact path="/a" render={() => (<div>Match</div>)} />
-          <Route render={() => (<div>Miss</div>)} />
-        </Switch>
-      </>
       <App />
     </ConnectedRouter>
   </Provider>,
