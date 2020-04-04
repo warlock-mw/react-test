@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { routerMiddleware, connectRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import logger from 'redux-logger';
-import counterReducer from '@/features/counter/counterSlice';
+import counterReducer from '@/modules/counterModule';
 
 export const history = createBrowserHistory();
 
