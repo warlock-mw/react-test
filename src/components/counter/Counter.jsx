@@ -9,7 +9,6 @@ function Counter(){
     const dispatch = useDispatch();
     const handle   = bindActionCreators({ increment, decrement }, dispatch);
 
-    console.log(handle);
     return (
       <div>
         <div>
