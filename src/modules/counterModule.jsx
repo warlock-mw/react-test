@@ -17,7 +17,6 @@ export const slice = createSlice({
     },
     reducers: {
         increment: state => {
-            console.log(state);
             const res = changeCount(state.count, 1);
 
             state.count     = res.count;

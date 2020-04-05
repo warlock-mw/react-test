@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { increment, decrement, selectCounter } from '@/modules/counterModule';
 import CounterList from '@/components/counter/CounterList';
 
-function Counter(){
+function Counter() {
     const data     = useSelector(selectCounter);
     const dispatch = useDispatch();
     const handle   = bindActionCreators({ increment, decrement }, dispatch);
