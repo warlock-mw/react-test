@@ -1,13 +1,13 @@
 import React from 'react';
 import Node from '@/components/graph/Node';
 
-function C() {
+function GraphView() {
     return (
       <div>
-        <p>C</p>
+        <p>グラフ</p>
         <Node />
       </div>
     );
 }
 
-export default C;
+export default GraphView;

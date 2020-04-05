@@ -1,13 +1,13 @@
 import React from 'react';
 import List from '@/components/qiita/List';
 
-function B() {
+function QiitaView() {
     return (
       <div>
-        <p>B</p>
+        <p>Qiita</p>
         <List />
       </div>
     );
 }
 
-export default B;
+export default QiitaView;

@@ -6,6 +6,11 @@
 .AppNav {
   text-align: center;
   font-size: 30px;
+
+  ul li {
+    display: inline;
+    margin-right: 1em;
+  }
 }
 
 .AppHeader {

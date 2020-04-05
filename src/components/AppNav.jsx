@@ -5,9 +5,11 @@ import styles from '@/scss/global.module.scss';
 function AppNav() {
     return (
       <div className={styles.AppNav}>
-        <Link to="/">A</Link>
-        <Link to="/b">B</Link>
-        <Link to="/c">C</Link>
+        <ul>
+          <li><Link to="/">カウンター</Link></li>
+          <li><Link to="/qiita">Qiita</Link></li>
+          <li><Link to="/graph">グラフ</Link></li>
+        </ul>
       </div>
     );
 }

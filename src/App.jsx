@@ -3,9 +3,9 @@ import { Route, Switch } from 'react-router';
 import AppNav from '@/components/AppNav';
 import AppHeader from '@/components/AppHeader';
 import AppFooter from '@/components/AppFooter';
-import A from '@/views/A';
-import B from '@/views/B';
-import C from '@/views/C';
+import CounterView from '@/views/CounterView';
+import QiitaView from '@/views/QiitaView';
+import GraphView from '@/views/GraphView';
 import styles from '@/scss/global.module.scss';
 
 function App() {
@@ -16,9 +16,9 @@ function App() {
       <AppHeader />
       
       <Switch>
-        <Route exact path="/" component={A} />
-        <Route path="/b" component={B} />
-        <Route path="/c" component={C} />
+        <Route exact path="/" component={CounterView} />
+        <Route path="/qiita" component={QiitaView} />
+        <Route path="/graph" component={GraphView} />
       </Switch>
 
       <AppFooter />

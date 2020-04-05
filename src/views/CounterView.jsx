@@ -1,13 +1,13 @@
 import React from 'react';
 import Counter from '@/components/counter/Counter';
 
-function A() {
+function CounterView() {
     return (
       <div>
-        <p>A</p>
+        <p>カウンター</p>
         <Counter />
       </div>
     );
 }
 
-export default A;
+export default CounterView;
